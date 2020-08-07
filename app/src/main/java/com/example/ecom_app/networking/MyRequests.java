@@ -24,7 +24,7 @@ public interface MyRequests {
                            @Query("phone") String phone, @Query("password") String password);
 
     @GET("api/v1/user/auth/products")
-    Call<ProductsModel> getcategory(@Path("category_id") String id);
+    Call<ProductsModel> getcategory(@Query("category_id") String id);
 
 
 }

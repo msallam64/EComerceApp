@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.ecom_app.R;
@@ -33,17 +35,18 @@ public class TopCategoryItem extends AppCompatActivity {
         intent = getIntent();
         categoryimage = intent.getStringExtra("topimage");
         id = intent.getIntExtra("id", 0);
-        topimage=findViewById(R.id.iv_category);
+        topimage = findViewById(R.id.iv_category);
         Glide.with(getApplicationContext()).load(IMAGE_URL + categoryimage)
                 .into(topimage);
-        String idcategory=String.valueOf(id);
+        final String idcategory = String.valueOf(id);
         MyRequests dataInterface = MyRetrofit.getRetrofitInstance().create(MyRequests.class);
         Call<ProductsModel> dataModelCall = dataInterface.getcategory(idcategory);
         dataModelCall.enqueue(new Callback<ProductsModel>() {
             @Override
             public void onResponse(Call<ProductsModel> call, Response<ProductsModel> response) {
-                ProductsModel productsModel=response.body();
-                List<Data> data=productsModel.getData();
+                Log.d("id", idcategory);
+                ProductsModel productsModel = response.body();
+                List<Data> data = productsModel.getData();
 
             }
 
